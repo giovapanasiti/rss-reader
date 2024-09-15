@@ -15,6 +15,8 @@ class FeedsController < ApplicationController
 
   def new
     authorization.skip
+    @feed = Feed.new
+    @feed_labels = params[:feed_labels]
     @feed_url = params[:feed_url]
   end
 
@@ -26,7 +28,8 @@ class FeedsController < ApplicationController
   def create
     authorization.skip
     @feed_url = params[:feed_url]
-    feed = Feed::Create.call(@feed_url, user: current_user)
+    labels = params[:feed_labels]&.split(',')
+    feed = Feed::Create.call(@feed_url, labels , user: current_user)
 
     if feed && feed.valid?
       CallableJob.perform_later(Feed::FetchOne, feed)
@@ -47,6 +50,7 @@ class FeedsController < ApplicationController
       feed,
       params[:feed_name],
       params[:feed_url],
+      params[:feed_labels].split(','),
       params[:group_id]
     )
 

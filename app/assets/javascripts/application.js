@@ -104,7 +104,12 @@ var StoryView = Backbone.View.extend({
   events: {
     "click .story-preview" : "storyClicked",
     "click .story-keep-unread" : "toggleKeepUnread",
-    "click .story-starred" : "toggleStarred"
+    "click .story-starred" : "toggleStarred",
+    "click .generate_from_article": "generateFromArticle"
+  },
+
+  generateFromArticle: function () {
+    console.log("generateFromArticle")
   },
 
   initialize: function() {

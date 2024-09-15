@@ -11,10 +11,11 @@ class FeedRepository
     Feed.where(id: ids)
   end
 
-  def self.update_feed(feed, name, url, group_id = nil)
+  def self.update_feed(feed, name, url,labels, group_id = nil)
     feed.name = name
     feed.url = url
     feed.group_id = group_id
+    feed.labels = labels
     feed.save
   end
 

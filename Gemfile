@@ -28,6 +28,7 @@ gem "uglifier"
 gem "will_paginate"
 
 group :development do
+  gem 'sqlite3', '~> 1.4'
   gem "rubocop", require: false
   gem "rubocop-capybara", require: false
   gem "rubocop-factory_bot", require: false

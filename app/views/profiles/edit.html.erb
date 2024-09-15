@@ -1,5 +1,6 @@
 <h1><%= t('.title') %></h1>
 
+
 <%= form_with(model: user, url: profile_path) do |form| %>
   <fieldset>
     <legend><%= t(".stories_feed_settings") %></legend>
@@ -17,6 +18,10 @@
     </div>
     <%= form.label :username %>
     <%= form.text_field :username, required: true %>
+
+    <%= form.label :openai_key %>
+    <%= form.text_field :openai_key %>
+
     <%= form.label :password_challenge, "Existing password" %>
     <%= form.password_field :password_challenge, required: true %>
   </fieldset>

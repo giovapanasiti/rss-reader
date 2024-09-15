@@ -12,7 +12,11 @@
       </p>
     </div>
     <div class="feed-actions">
+
       <div class="feed-last-updated">
+          <% feed.labels&.each do |l|%>
+              <span class="label label-success"><%= l %></span>
+          <% end %>
         <span class="last-updated"><%= t('partials.feed.last_updated') %></span>
         <span class="last-updated-time">
           <% if feed.last_fetched %>
@@ -22,7 +26,10 @@
           <% end %>
         </span>
       </div>
+
+
       <span class="read-feed">
+
         <a class="icon-external-link" aria-label="visit feed site" href="<%= feed.url %>"></a>
       </span>
       <span class="edit-feed">

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_09_172408) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_15_101624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "feeds", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string "name"
     t.text "url"
     t.datetime "last_fetched"
     t.datetime "created_at", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_172408) do
     t.integer "status"
     t.integer "group_id"
     t.bigint "user_id", null: false
+    t.jsonb "labels"
     t.index ["url", "user_id"], name: "index_feeds_on_url_and_user_id", unique: true
     t.index ["user_id"], name: "index_feeds_on_user_id"
   end
@@ -117,7 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_172408) do
   end
 
   create_table "groups", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255, null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -146,7 +147,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_172408) do
     t.boolean "is_starred", default: false
     t.text "entry_id"
     t.string "enclosure_url"
+    t.string "generation_status"
+    t.string "generated_article_link"
+    t.text "generation_messages"
     t.index ["entry_id", "feed_id"], name: "index_stories_on_entry_id_and_feed_id", unique: true
+    t.index ["generation_status"], name: "index_stories_on_generation_status"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -164,13 +169,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_172408) do
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.string "password_digest", limit: 255
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "api_key", limit: 255, null: false
+    t.string "api_key", null: false
     t.string "username", null: false
-    t.boolean "admin", null: false
+    t.boolean "admin", default: false, null: false
     t.string "stories_order", default: "desc"
+    t.string "openai_key"
     t.index ["api_key"], name: "index_users_on_api_key", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

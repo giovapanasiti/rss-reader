@@ -1,16 +1,22 @@
 development:
   adapter: postgresql
-  database: stringer_dev
   encoding: unicode
-  host: localhost
+  database: stringer_dev
   pool: 5
+  username: your_username
+  password: your_password
+  host: localhost
+  port: 5432
 
 test:
   adapter: postgresql
-  database: stringer_test
   encoding: unicode
-  host: localhost
+  database: stringer_test
   pool: 5
+  username: your_username
+  password: your_password
+  host: localhost
+  port: 5432
 
 production:
   url: <%= ENV["DATABASE_URL"] %>
