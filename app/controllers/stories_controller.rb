@@ -6,6 +6,11 @@ class StoriesController < ApplicationController
     @unread_stories = authorization.scope(StoryRepository.unread(order:))
   end
 
+  def show
+    @story = authorization.check(StoryRepository.fetch(params[:id]))
+  end
+
+
   def update
     json_params = JSON.parse(request.body.read, symbolize_names: true)
 

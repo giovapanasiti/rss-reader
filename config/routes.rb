@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   get "/logout", to: "sessions#destroy"
   get "/news", to: "stories#index"
+  get "/news/:id", to: "stories#show"
   post "/setup/password", to: "passwords#create"
   get "/setup/password", to: "passwords#new"
   get "/setup/tutorial", to: "tutorials#index"

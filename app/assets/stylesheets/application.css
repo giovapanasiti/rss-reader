@@ -742,3 +742,7 @@ li.blank {
       z-index: 1000;
   }
 }
+
+.modal {
+    z-index: 9999;
+}
