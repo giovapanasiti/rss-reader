@@ -4,6 +4,15 @@
 
 /* declare variables */
 
+/*
+colori sul viola
+--color-primary: #8500f6;
+--color-secondary: #484948;
+--color-primary-hover: #F59745;
+--color-background: #fbf4ff; */
+
+
+
 :root {
   --color-primary: #F67100;
   --color-secondary: #484948;
@@ -714,4 +723,22 @@ li.blank {
   margin-bottom: 10px;
   font-size: 28px;
   text-align: center;
+}
+
+.shortcut-legend-feed {
+    display: none;
+}
+
+
+/* show only on md or bigger */
+@media (min-width: 1280px) {
+  .shortcut-legend-feed {
+      display: block;
+      position: fixed;
+      top: 10%;
+      left: 0;
+      padding: 10px;
+      list-style: none;
+      z-index: 1000;
+  }
 }
